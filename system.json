@@ -1,0 +1,107 @@
+{
+    "type": "NetworkGraph",
+    "protocol": "TLS1.2",
+    "nodes": [
+        {  
+            "id": "Ron-PC", "label": "Ron-PC-GC", 
+            "local_addresses": ["192.168.0.40", "192.168.0.41"], 
+            "properties": {
+                "type": "Computer",
+                "hostname": "CO-GC",
+                "State": "Ok",
+                "Connection": "Wired-Ethernet"
+            }
+        },
+        {  
+            "id": "Ron-MAC", "label": "Ron-MAC", 
+            "local_addresses": ["192.168.0.105"], 
+            "properties": {
+                "type": "Laptop",
+                "hostname": "ron-mac",
+                "State": "Ok",
+                "Connection": "Wifi"
+            }
+        },
+        {  
+            "id": "CohenR", "label": "Downfloor-AccessPoint", 
+            "local_addresses": ["192.168.0.3"], 
+            "properties": {
+                "type": "Switch",
+                "Manifuctor": "TP-Link",
+                "State": "Ok",
+                "Connection": "Wifi/Ethernet"
+            }
+        },
+        {  
+            "id": "Cohen", "label": "Router", 
+            "local_addresses": ["192.168.0.1", "84.69.224.57"], 
+            "properties": {
+                "type": "Router",
+                "Manifuctor": "HotBox",
+                "State": "Ok",
+                "Connection": "Wifi/Ethernet"
+            }
+        },
+        {  
+            "id": "Cohen_2", "label": "Upperfloor-AccessPoint", 
+            "local_addresses": ["192.168.0.1"], 
+            "properties": {
+                "type": "Switch",
+                "Manifuctor": "TP-Link",
+                "State": "Ok",
+                "Connection": "Wifi"
+            }
+        },
+        {  
+            "id": "CohenHTPC", "label": "HTPC living room", 
+            "local_addresses": ["192.168.0.60"], 
+            "properties": {
+                "type": "Computer",
+                "Hostname": "HTPCohen",
+                "State": "Ok",
+                "Connection": "Wired-Ethernet"
+            }
+        },
+        {  
+            "id": "YuvalPC", "label": "YuvalPC", 
+            "local_addresses": ["192.168.0.50"], 
+            "properties": {
+                "type": "Computer",
+                "Hostname": "Yuval",
+                "State": "Ok",
+                "Connection": "Wired-Ethernet"
+            }
+        },
+        {  
+            "id": "CohenFamily", "label": "Shared Laptop", 
+            "local_addresses": ["192.168.0.200"], 
+            "properties": {
+                "type": "Laptop",
+                "Hostname": "Cohen",
+                "State": "Ok",
+                "Connection": "Wifi"
+            }
+        },
+        {  
+            "id": "Eli", "label": "Eli work Laptop", 
+            "local_addresses": ["192.168.0.103"], 
+            "properties": {
+                "type": "Laptop",
+                "Hostname": "EliPC",
+                "State": "Failed",
+                "Connection": "Wifi",
+                "Error": "Can't access 192.168.0.1 the router!"
+            }
+        }
+    ],
+    "links": [
+        { "source": "CohenR", "target": "Ron-PC", "cost": 1, "properties": { "state": "Connected", "protocol": "HTTPS", "ports": [443, 80, "Any"]}},
+        { "source": "CohenR", "target": "Ron-MAC", "cost": 1, "properties": { "state": "Connected", "protocol": "tcp/ip", "ports": "None" }},
+        { "source": "Cohen", "target": "CohenR", "cost": 1, "properties": { "state": "Connected", "protocol": "HTTPS", "ports": [443, 80, "Any"]}},
+        { "source": "Cohen", "target": "CohenHTPC", "cost": 1, "properties": { "state": "Connected", "protocol": "HTTPS", "ports": [443, 80, "Any"]}},
+        { "source": "Cohen", "target": "Cohen_2", "cost": 1, "properties": { "state": "Connected" }, "protocol": "tcp/ip", "ports": "None" },
+        { "source": "Cohen", "target": "CohenFamily", "cost": 1, "properties": { "state": "Connected", "protocol": "HTTPS", "ports": [443, 80, "Any"]}},
+        { "source": "Cohen", "target": "Eli", "cost": 1, "properties": { "state": "Disconnected","protocol": "HTTPS", "ports": [443, 80, "Any"]}},
+        { "source": "Cohen_2", "target": "YuvalPC", "cost": 1, "properties": { "state": "Disconnected", "protocol": "HTTPS", "ports": [443, 80, "Any"]}}
+    ]
+}
